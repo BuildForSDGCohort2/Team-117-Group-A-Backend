@@ -1,3 +1,11 @@
+## Instructions
+General
+Create a branch off the develop branch and do not push directly to it (the develop branch)
+Always raise a PR against the develop branch and during each PR, please include comments or descriptions. A template is given below:
+
+ABOUT PR
+This PR gives users the ability to register on the platform.
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
