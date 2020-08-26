@@ -15,14 +15,14 @@ class AuthController extends Controller
      * @return void
      */
     public function register(Request $request) {
-        $check = User::where('email', $request->email)->get();
-        if($check) {
-            return response()->json(['status' => 'failed', 'error' => 'duplicate email'], 403);
-        }
-        $check2 = User::where('phone', $request->phone)->get();
-        if($check2) {
-            return response()->json(['status' => 'failed', 'error' => 'duplicate phone number'], 403);
-        }
+        // $check = User::where('email', $request->email)->get();
+        // if($check) {
+        //     return response()->json(['status' => 'failed', 'error' => 'duplicate email'], 403);
+        // }
+        // $check2 = User::where('phone', $request->phone)->get();
+        // if($check2) {
+        //     return response()->json(['status' => 'failed', 'error' => 'duplicate phone number'], 403);
+        // }
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
