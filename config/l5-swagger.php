@@ -14,6 +14,7 @@ return [
                 \Illuminate\Routing\Middleware\SubstituteBindings::class,
                 \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
                 'auth',
+                'title' => 'Integration Swagger in Laravel with Passport Auth',
             ],
 
             'routes' => [
@@ -126,7 +127,7 @@ return [
                 ],
                 */
 
-                /* Open API 3.0 support
+               // Open API 3.0 support
                 'passport' => [ // Unique name of security
                     'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
@@ -141,7 +142,6 @@ return [
                         ],
                     ],
                 ],
-                */
             ],
             'security' => [
                 /*
@@ -164,7 +164,7 @@ return [
          * Set this to `true` in development mode so that docs would be regenerated on each request
          * Set this to `false` to disable swagger generation on production
         */
-        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', true),
+        'generate_always' => env('L5_SWAGGER_GENERATE_ALWAYS', false),
 
         /*
          * Set this to `true` to generate a copy of documentation in yaml format
