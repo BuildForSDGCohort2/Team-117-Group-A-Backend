@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/Team-117-Group-A-Backend/public/api/register": {
+        "/api/register": {
             "post": {
                 "tags": [
                     "Register User"
@@ -81,7 +81,7 @@
                 }
             }
         },
-        "/Team-117-Group-A-Backend/public/api/logout": {
+        "/api/logout": {
             "get": {
                 "tags": [
                     "Logout"
@@ -127,9 +127,9 @@
                 "scheme": "https",
                 "flows": {
                     "password": {
-                        "authorizationUrl": "http://localhost:8080/Team-117-Group-A-Backend/public/oauth/authorize",
-                        "tokenUrl": "http://localhost:8080/Team-117-Group-A-Backend/public/oauth/token",
-                        "refreshUrl": "http://localhost:8080/Team-117-Group-A-Backend/public/token/refresh",
+                        "authorizationUrl": "http://moboclinic.herokuapp.com/oauth/authorize",
+                        "tokenUrl": "http://moboclinic.herokuapp.com/oauth/token",
+                        "refreshUrl": "http://moboclinic.herokuapp.com/token/refresh",
                         "scopes": []
                     }
                 }
