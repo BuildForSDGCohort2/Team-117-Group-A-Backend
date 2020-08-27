@@ -1,14 +1,90 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Your super  ApplicationAPI",
+        "title": "MoboClinic ApplicationAPI",
         "version": "1.0.0"
     },
     "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Register User"
+                ],
+                "summary": "Register User",
+                "description": "register user by first name, last name, phone number, email, password",
+                "operationId": "authRegister",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "first_name",
+                                    "last_name",
+                                    "phone",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "first_name": {
+                                        "type": "string",
+                                        "format": "first_name",
+                                        "example": "Segun"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "format": "last_name",
+                                        "example": "Aka"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "format": "phone",
+                                        "example": "234894445"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Record Created"
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong email address or password. Please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/logout": {
             "get": {
                 "tags": [
-                    "auth"
+                    "Logout"
                 ],
                 "summary": "Logout",
                 "description": "Logout user and invalidate token",
@@ -36,9 +112,27 @@
                 },
                 "security": [
                     {
-                        "bearer": []
+                        "passport": []
                     }
                 ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "passport": {
+                "type": "oauth2",
+                "description": "Laravel passport oauth2 security.",
+                "in": "header",
+                "scheme": "https",
+                "flows": {
+                    "password": {
+                        "authorizationUrl": "http://moboclinic.herokuapp.com/oauth/authorize",
+                        "tokenUrl": "http://moboclinic.herokuapp.com/oauth/token",
+                        "refreshUrl": "http://moboclinic.herokuapp.com/token/refresh",
+                        "scopes": []
+                    }
+                }
             }
         }
     },

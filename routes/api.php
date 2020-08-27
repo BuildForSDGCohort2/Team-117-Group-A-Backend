@@ -18,7 +18,6 @@ Route::group(['middleware' => 'auth:api'], function () {
         return $request->user();
     });
     Route::get('/logout', 'AuthController@logout');
-
 });
 Route::post('register', 'AuthController@register');
 Route::get('/test', function () {
