@@ -1,4 +1,7 @@
 ## Instructions
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1568130b8ed64a119d9af9a521cf59bc)](https://app.codacy.com/gh/BuildForSDGCohort2/Team-117-Group-A-Backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDGCohort2/Team-117-Group-A-Backend&utm_campaign=Badge_Grade_Dashboard)
+
 General
 
 Create a branch off the develop branch and do not push directly to it (the develop branch)
