@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Gate;
 // Laravel Passport
 use Laravel\Passport\Passport;
 
+// Laravel Passport Multiauth
+use Route;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -30,6 +33,13 @@ class AuthServiceProvider extends ServiceProvider
 
         //
         Passport::routes();
+
+         // Middleware `oauth.providers` middleware defined on $routeMiddleware above
+         Route::group(['middleware' => 'oauth.providers'], function () {
+            Passport::routes(function ($router) {
+                return $router->forAccessTokens();
+            });
+        });
         Passport::tokensExpireIn(now()->addDays(1));
 
         Passport::refreshTokensExpireIn(now()->addDays(2));
