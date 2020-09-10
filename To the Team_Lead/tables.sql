@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `last_name` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` int(20) NOT NULL,
   `date_registered` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_phone` (`phone`),
