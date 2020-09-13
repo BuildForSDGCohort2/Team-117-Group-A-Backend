@@ -150,5 +150,8 @@ class AuthController extends Controller
         return response()->json(['message' => 'User not logged in'], 401);
 
     }
+    public function user(Request $request) {
+        return $request->user();
+    }
 
 }

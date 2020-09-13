@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware' => ['api', 'multiauth:api,companies']], function () {
-    Route::get('/user',  function(Request $request){
-        return $request->user();
-    });
+    Route::get('/user',  'AuthController@user');
     Route::get('/logout', 'AuthController@logout');
 });
 //newly created middleware provider (at config/auth.php)
@@ -24,13 +22,10 @@ Route::group(['middleware' => ['api', 'multiauth:api,companies']], function () {
 Route::post('register', 'AuthController@register');
 Route::post('registerCompany', 'AuthController@registerCompany');
 Route::group(['middleware' => ['api', 'multiauth:companies']], function () {
-    Route::get('/companies', function (Request $request) {
-        // The instance of user authenticated (Admin or User in this case) will be returned
-        return $request->user();
-    });
-});
-Route::get('/login', function() {
-    return "This is login";
+    // Route::get('/companies', function (Request $request) {
+    //     // The instance of user authenticated (Admin or User in this case) will be returned
+    //     return $request->user();
+    // });
 });
 
 //Tests
@@ -38,3 +33,9 @@ Route::post('/addTest', 'TestController@add');
 Route::get('/tests', 'TestController@all');
 Route::delete('/test/{id}', 'TestController@delete');
 Route::put('/test/{id}', 'TestController@update');
+
+//Requests
+Route::post('/addRequest', 'RequestController@add');
+Route::get('/requests', 'RequestController@all');
+Route::delete('/request/{id}', 'RequestController@delete');
+Route::put('/request/{id}', 'RequestController@update');

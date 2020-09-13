@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Test;
+use App\RequestModel;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Str;
 use Validator;
 
 class TestController extends Controller
@@ -15,12 +17,6 @@ class TestController extends Controller
     {
         $this->status = config('constants.status');
     }
-     /**
-     * Register
-     *
-     * @param  mixed $request
-     * @return void
-     */
 
     /**
      * @OA\Post(
@@ -145,7 +141,7 @@ class TestController extends Controller
      *     ),
      * @OA\RequestBody(
      *    required=true,
-     *    description="Pass user credentials",
+     *    description="Pass test credentials",
      *    @OA\JsonContent(
      *       required={"testName", "price", "description"},
      *       @OA\Property(property="testName", type="string", format="testName", example="Malaria"),

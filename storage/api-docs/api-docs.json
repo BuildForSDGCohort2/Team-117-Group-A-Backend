@@ -157,6 +157,180 @@
                 }
             }
         },
+        "/api/addRequest": {
+            "post": {
+                "tags": [
+                    "Add Request"
+                ],
+                "summary": "Add Request",
+                "description": "Add Request by testId, customerId, address",
+                "operationId": "addRequest",
+                "requestBody": {
+                    "description": "Pass request credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "testId",
+                                    "customerId",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "testId": {
+                                        "type": "integer",
+                                        "format": "testId",
+                                        "example": 21
+                                    },
+                                    "customerId": {
+                                        "type": "integer",
+                                        "format": "customerId",
+                                        "example": 4
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "50 Malaba street, Tunisia"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Record Created"
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong testId, customerId, address provided, please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/requests": {
+            "get": {
+                "tags": [
+                    "Get Requests"
+                ],
+                "summary": "Get Requests",
+                "operationId": "requests",
+                "responses": {
+                    "200": {
+                        "description": "Get all requests"
+                    }
+                }
+            }
+        },
+        "/api/request/{id}": {
+            "put": {
+                "tags": [
+                    "Update Request"
+                ],
+                "summary": "Update Request",
+                "description": "Update the values of a request",
+                "operationId": "updateRequest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of request that is to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass request credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "testId",
+                                    "customerId",
+                                    "address"
+                                ],
+                                "properties": {
+                                    "testId": {
+                                        "type": "integer",
+                                        "format": "testId",
+                                        "example": 4
+                                    },
+                                    "customerId": {
+                                        "type": "integer",
+                                        "format": "customerId",
+                                        "example": 7
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "format": "address",
+                                        "example": "55 Malabu, NY"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid details supplied"
+                    },
+                    "404": {
+                        "description": "Request not found"
+                    },
+                    "200": {
+                        "description": "request updated"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delete Request"
+                ],
+                "summary": "Delete Request",
+                "description": "deletes a single request from the  requests",
+                "operationId": "deleteRequest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of request to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "request deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
         "/api/addTest": {
             "post": {
                 "tags": [
@@ -183,9 +357,9 @@
                                         "example": "Malaria"
                                     },
                                     "price": {
-                                        "type": "string",
+                                        "type": "integer",
                                         "format": "price",
-                                        "example": "4000"
+                                        "example": 4000
                                     },
                                     "description": {
                                         "type": "string",
@@ -255,7 +429,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Pass user credentials",
+                    "description": "Pass test credentials",
                     "required": true,
                     "content": {
                         "application/json": {
@@ -272,9 +446,9 @@
                                         "example": "Malaria"
                                     },
                                     "price": {
-                                        "type": "string",
+                                        "type": "integer",
                                         "format": "price",
-                                        "example": "4000"
+                                        "example": 4000
                                     },
                                     "description": {
                                         "type": "string",
