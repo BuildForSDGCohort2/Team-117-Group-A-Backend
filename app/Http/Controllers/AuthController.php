@@ -141,27 +141,7 @@ class AuthController extends Controller
 
     }
 
-    /**
-     * @OA\Get(
-     * path="/api/logout",
-     * summary="Logout",
-     * description="Logout user and invalidate token",
-     * operationId="authLogout",
-     * tags={"Logout"},
-     * security={ {"passport": {} }},
-     * @OA\Response(
-     *    response=200,
-     *    description="Success"
-     *     ),
-     * @OA\Response(
-     *    response=401,
-     *    description="Returns when user is not authenticated",
-     *    @OA\JsonContent(
-     *       @OA\Property(property="message", type="string", example="Not authorized"),
-     *    )
-     * )
-     * )
-     */
+    //
     public function logout(Request $request) {
         if($request->user()){
             $request->user()->token()->revoke();
@@ -171,7 +151,4 @@ class AuthController extends Controller
 
     }
 
-    public function allow(Request $request) {
-        return "Yes o";
-    }
 }

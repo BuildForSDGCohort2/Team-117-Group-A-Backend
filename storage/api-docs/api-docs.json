@@ -157,27 +157,60 @@
                 }
             }
         },
-        "/api/logout": {
-            "get": {
+        "/api/addTest": {
+            "post": {
                 "tags": [
-                    "Logout"
+                    "Add Test"
                 ],
-                "summary": "Logout",
-                "description": "Logout user and invalidate token",
-                "operationId": "authLogout",
+                "summary": "Add Test",
+                "description": "Add Test by testName, price, description",
+                "operationId": "addTest",
+                "requestBody": {
+                    "description": "Pass test credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "testName",
+                                    "price",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "testName": {
+                                        "type": "string",
+                                        "format": "testName",
+                                        "example": "Malaria"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "format": "price",
+                                        "example": "4000"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "description",
+                                        "example": "A test for Malaria"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
-                    "200": {
-                        "description": "Success"
+                    "201": {
+                        "description": "Record Created"
                     },
-                    "401": {
-                        "description": "Returns when user is not authenticated",
+                    "422": {
+                        "description": "Wrong credentials response",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Not authorized"
+                                            "example": "Sorry, wrong testName, price, description provided, please try again"
                                         }
                                     },
                                     "type": "object"
@@ -185,30 +218,127 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "passport": []
+                }
+            }
+        },
+        "/api/tests": {
+            "get": {
+                "tags": [
+                    "Get Tests"
+                ],
+                "summary": "Get Tests",
+                "operationId": "tests",
+                "responses": {
+                    "200": {
+                        "description": "Get all tests"
                     }
-                ]
+                }
+            }
+        },
+        "/api/test/{id}": {
+            "put": {
+                "tags": [
+                    "Update Test"
+                ],
+                "summary": "Update Test",
+                "description": "Update the values of a test",
+                "operationId": "updateTest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of test that is to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "testName",
+                                    "price",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "testName": {
+                                        "type": "string",
+                                        "format": "testName",
+                                        "example": "Malaria"
+                                    },
+                                    "price": {
+                                        "type": "string",
+                                        "format": "price",
+                                        "example": "4000"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "format": "description",
+                                        "example": "A test for Malaria"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid details supplied"
+                    },
+                    "404": {
+                        "description": "Test not found"
+                    },
+                    "200": {
+                        "description": "test updated"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delete Test"
+                ],
+                "summary": "Delete Test",
+                "description": "deletes a single test from the  tests",
+                "operationId": "deleteTest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of test to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "test deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
             }
         }
     },
     "components": {
         "securitySchemes": {
-            "passport": {
-                "type": "oauth2",
-                "description": "Laravel passport oauth2 security.",
-                "in": "header",
-                "scheme": "https",
-                "flows": {
-                    "password": {
-                        "authorizationUrl": "http://moboclinic.herokuapp.com/oauth/authorize",
-                        "tokenUrl": "http://moboclinic.herokuapp.com/oauth/token",
-                        "refreshUrl": "http://moboclinic.herokuapp.com/token/refresh",
-                        "scopes": []
-                    }
-                }
+            "api_key_security_example": {
+                "type": "apiKey",
+                "description": "A short description for security scheme",
+                "name": "api_key",
+                "in": "header"
             }
         }
     },
