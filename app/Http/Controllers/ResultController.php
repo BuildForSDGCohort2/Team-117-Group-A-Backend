@@ -140,7 +140,7 @@ class ResultController extends Controller
      *    required=true,
      *    description="Pass result credentials",
      *    @OA\JsonContent(
-     *       required={'requestId', "testId", "customerId", "companiesId", "result"},
+     *       required={"requestId", "testId", "customerId", "companiesId", "result"},
      *       @OA\Property(property="requestId", type="integer", format="requestId", example=41),
      *       @OA\Property(property="testId", type="integer", format="testId", example=4),
      *       @OA\Property(property="customerId", type="integer", format="customerId", example=7),

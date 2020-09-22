@@ -5,6 +5,122 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/addAccepted": {
+            "post": {
+                "tags": [
+                    "Add Accepted"
+                ],
+                "summary": "Add Accepted",
+                "description": "Add Accepted by requestId, acceptedCompaniesId",
+                "operationId": "addAccepted",
+                "requestBody": {
+                    "description": "Pass accepted credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "requestId",
+                                    "acceptedCompaniesId"
+                                ],
+                                "properties": {
+                                    "requestId": {
+                                        "type": "integer",
+                                        "format": "requestId",
+                                        "example": 21
+                                    },
+                                    "acceptedCompaniesId": {
+                                        "type": "integer",
+                                        "format": "acceptedCompaniesId",
+                                        "example": 4
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Record Created"
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong testId, customerId, address provided, please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/accepted": {
+            "get": {
+                "tags": [
+                    "Get Accepted"
+                ],
+                "summary": "Get Accepted",
+                "operationId": "accepted",
+                "responses": {
+                    "200": {
+                        "description": "Get all accepted"
+                    }
+                }
+            }
+        },
+        "/api/companyAccepted": {
+            "get": {
+                "tags": [
+                    "Get Company Accepted"
+                ],
+                "summary": "Get Company Accepted",
+                "operationId": "companyAccepted",
+                "responses": {
+                    "200": {
+                        "description": "Get all company accepted"
+                    }
+                }
+            }
+        },
+        "/api/accepted/{id}": {
+            "delete": {
+                "tags": [
+                    "Delete Request"
+                ],
+                "summary": "Delete Accepted",
+                "description": "deletes a single accepted request from the  accepted requests",
+                "operationId": "deleteAccepted",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of accepted to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "accepted deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
         "/api/register": {
             "post": {
                 "tags": [
@@ -324,6 +440,204 @@
                 "responses": {
                     "200": {
                         "description": "request deleted"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            }
+        },
+        "/api/addResult": {
+            "post": {
+                "tags": [
+                    "Add Result"
+                ],
+                "summary": "Add Result",
+                "description": "Add Result by requestId, testId, customerId, companiesId, result",
+                "operationId": "addResult",
+                "requestBody": {
+                    "description": "Pass result credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "requestId",
+                                    "testId",
+                                    "customerId",
+                                    "companiesId",
+                                    "result"
+                                ],
+                                "properties": {
+                                    "requestId": {
+                                        "type": "integer",
+                                        "format": "requestId",
+                                        "example": 11
+                                    },
+                                    "testId": {
+                                        "type": "integer",
+                                        "format": "testId",
+                                        "example": 21
+                                    },
+                                    "customerId": {
+                                        "type": "integer",
+                                        "format": "customerId",
+                                        "example": 4
+                                    },
+                                    "companiesId": {
+                                        "type": "integer",
+                                        "format": "companiesId",
+                                        "example": 22
+                                    },
+                                    "result": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Positive, you have malaria"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Record Created"
+                    },
+                    "422": {
+                        "description": "Wrong credentials response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Sorry, wrong testId, customerId, companiesId, result provided, please try again"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/results": {
+            "get": {
+                "tags": [
+                    "Get Results"
+                ],
+                "summary": "Get Results",
+                "operationId": "results",
+                "responses": {
+                    "200": {
+                        "description": "Get all results"
+                    }
+                }
+            }
+        },
+        "/api/result/{id}": {
+            "put": {
+                "tags": [
+                    "Update Result"
+                ],
+                "summary": "Update Result",
+                "description": "Update the values of a result",
+                "operationId": "updateResult",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of result that is to be updated",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Pass result credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "requestId",
+                                    "testId",
+                                    "customerId",
+                                    "companiesId",
+                                    "result"
+                                ],
+                                "properties": {
+                                    "requestId": {
+                                        "type": "integer",
+                                        "format": "requestId",
+                                        "example": 41
+                                    },
+                                    "testId": {
+                                        "type": "integer",
+                                        "format": "testId",
+                                        "example": 4
+                                    },
+                                    "customerId": {
+                                        "type": "integer",
+                                        "format": "customerId",
+                                        "example": 7
+                                    },
+                                    "companiesId": {
+                                        "type": "integer",
+                                        "format": "companiesId",
+                                        "example": 17
+                                    },
+                                    "result": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "Negative, you do not have malaria"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid details supplied"
+                    },
+                    "404": {
+                        "description": "Result not found"
+                    },
+                    "200": {
+                        "description": "result updated"
+                    },
+                    "default": {
+                        "description": "unexpected error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Delete Result"
+                ],
+                "summary": "Delete Result",
+                "description": "deletes a single result from the  results",
+                "operationId": "deleteResult",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of result to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "result deleted"
                     },
                     "default": {
                         "description": "unexpected error"
