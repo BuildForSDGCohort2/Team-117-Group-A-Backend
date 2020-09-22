@@ -79,7 +79,7 @@ class ResultController extends Controller
      * )
     */
     public function all(Request $request) {
-        $requests = Result::with(['request', 'test','customer', 'company'])->where('accepted', 0)->get();
+        $requests = Result::with(['request', 'test','customer', 'company'])->get();
         return response()->json(['status' => $this->status['ok'], 'data' => $requests], Response::HTTP_OK);
     }
 
@@ -174,7 +174,7 @@ class ResultController extends Controller
             'testId' => $request->testId,
             'customerId' => $request->customerId,
             'companiesId' => $request->companiesId,
-            'result' => $request->address,
+            'result' => $request->result,
         ];
         $request = Result::findOrFail($id)->first();
         if(!$request) {
