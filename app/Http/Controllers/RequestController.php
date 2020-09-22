@@ -75,7 +75,7 @@ class RequestController extends Controller
      * )
     */
     public function all(Request $request) {
-        $requests = RequestModel::with(['test','customer'])->get();
+        $requests = RequestModel::with(['test','customer'])->where('accepted', 0)->get();
         return response()->json(['status' => $this->status['ok'], 'data' => $requests], Response::HTTP_OK);
     }
 
@@ -168,13 +168,12 @@ class RequestController extends Controller
             'customerId' => $request->customerId,
             'address' => $request->address,
         ];
-        $request = RequestModel::findOrFail($id);
+        $request = RequestModel::findOrFail($id)->first;
         if(!$request) {
             return response()->json(['status'=>$this->status['failed']], 400);
         }
         $res = $request->fill($data)->save();
         if($res){
-            $test = RequestModel::findOrFail($id);
             return response()->json(['status'=>$this->status['ok'], 'data'=>$request], 200);
         }else{
             return response()->json(['status'=>$this->status['failed']], 400);
