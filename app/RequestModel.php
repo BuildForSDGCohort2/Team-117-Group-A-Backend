@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class RequestModel extends Model
 {
     protected $table = 'requests';
-    protected $fillable = ['testId', 'customerId', 'address', 'accepted'];
+    protected $fillable = ['testId', 'customerId', 'address', 'accepted', 'acceptedCompaniesId'];
     /**
      * Get the customer for the request.
      */
@@ -29,6 +29,6 @@ class RequestModel extends Model
      */
     public function acceptedCompany()
     {
-        return $this->hasOne('App\Company');
+        return $this->hasOne(Company::class, 'id', 'acceptedCompaniesId');
     }
 }

@@ -21,12 +21,6 @@ Route::group(['middleware' => ['api', 'multiauth:api,companies']], function () {
 // Route::post('/accept', 'AuthController@allow')->middleware('multiauth:companies');
 Route::post('register', 'AuthController@register');
 Route::post('registerCompany', 'AuthController@registerCompany');
-Route::group(['middleware' => ['api', 'multiauth:companies']], function () {
-    // Route::get('/companies', function (Request $request) {
-    //     // The instance of user authenticated (Admin or User in this case) will be returned
-    //     return $request->user();
-    // });
-});
 
 //Tests
 Route::post('/addTest', 'TestController@add');
@@ -39,3 +33,15 @@ Route::post('/addRequest', 'RequestController@add');
 Route::get('/requests', 'RequestController@all');
 Route::delete('/request/{id}', 'RequestController@delete');
 Route::put('/request/{id}', 'RequestController@update');
+
+// Accepted
+Route::post('/addAccepted', 'AcceptedController@add');
+Route::get('/accepted', 'AcceptedController@all');
+Route::get('/companyAccepted/{id}', 'AcceptedController@companyAll');
+Route::delete('/accepted/{id}', 'AcceptedController@delete');
+
+//Results
+Route::post('/addResult', 'ResultController@add');
+Route::get('/results', 'ResultController@all');
+Route::delete('/result/{id}', 'ResultController@delete');
+Route::put('/result/{id}', 'ResultController@update');
