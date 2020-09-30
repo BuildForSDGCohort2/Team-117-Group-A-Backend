@@ -14,8 +14,8 @@
     "fruitcake/laravel-cors": "^2.0",
     "guzzlehttp/guzzle": "^6.3",
     "laravel/framework": "^7.24",
-    "laravel/passport": "^9.3",
-    "laravel/tinker": "^2.0"
+    "laravel/tinker": "^2.0",
+    "smartins/passport-multiauth": "^7.0"
   },
   "require-dev": {
     "facade/ignition": "^2.0",
@@ -31,7 +31,9 @@
   },
   "extra": {
     "laravel": {
-      "dont-discover": []
+      "dont-discover": [
+        "laravel/passport"
+      ]
     }
   },
   "autoload": {
