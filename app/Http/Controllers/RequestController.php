@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\RequestModel;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
 
@@ -76,6 +77,21 @@ class RequestController extends Controller
     */
     public function all(Request $request) {
         $requests = RequestModel::with(['test','customer'])->where('accepted', 0)->get();
+        return response()->json(['status' => $this->status['ok'], 'data' => $requests], Response::HTTP_OK);
+    }
+
+    // Get all requests
+    /**
+     * @OA\Get(
+     * path="/api/userRequests",
+     * summary="Get User Requests",
+     * operationId="userRequests",
+     * tags={"Get User Requests"},
+     * @OA\Response(response="200", description="Get all user requests")
+     * )
+    */
+    public function user(Request $request) {
+        $requests = RequestModel::with(['test'])->where('customerId', $request->user()->id)->get();
         return response()->json(['status' => $this->status['ok'], 'data' => $requests], Response::HTTP_OK);
     }
 

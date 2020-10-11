@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['api', 'multiauth:api,companies']], function () {
     Route::get('/user',  'AuthController@user');
     Route::get('/logout', 'AuthController@logout');
+    Route::get('/userRequests', 'RequestController@user');
 });
 //newly created middleware provider (at config/auth.php)
 // Route::post('/accept', 'AuthController@allow')->middleware('multiauth:companies');
